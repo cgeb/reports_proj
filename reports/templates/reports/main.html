@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Reports{% endblock title %}
+
+{% block content %}
+  Reports
+  <hr>
+  {% for object in object_list %}
+    <div class="card mb-3">
+      {% if object.image %}
+        <img src="{{object.image.url}}" class="card-img-top" alt="{{object.name}}">
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title">{{object.name}}</h5>
+        <p class="card-text">{{object.remarks|truncatewords:4}}</p>
+        <a href="{{object.get_absolute_url}}" class="btn btn-primary">Details</a>
+        <a href="{% url 'reports:pdf' object.pk %}" class="btn btn-danger">PDF</a>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock content %}
